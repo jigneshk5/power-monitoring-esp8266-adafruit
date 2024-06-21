@@ -1,8 +1,8 @@
 #include <ESP8266WiFi.h>
 #include <MQTT.h>
 
-const char ssid[] = "Tenda_10DF10";
-const char pass[] = "jignesh_pass";
+const char ssid[] = "***********";   //Enter your wifi SSID
+const char pass[] = "***********";   //Enter your wifi password
 const int sensorIn = A0;
 int mVperAmp = 66; // use 185 for 5A, 100 for 20A Module and 66 for 30A Module
 
@@ -21,13 +21,13 @@ void connect() {
   }
 
   Serial.print("\nconnecting...");
-  while (!client.connect("mqtt", "jigneshk5", "fb72c939a76045d3b799e9db22b7a37d")) {
+  while (!client.connect("mqtt", "****", "******************************")) {    //enter you Adafruit.io credentials
     Serial.print(".");
     delay(1000);
   }
   Serial.println("\nconnected!");
-  client.subscribe("jigneshk5/errors");
-  client.subscribe("jigneshk5/throttle");
+  client.subscribe("****/errors");   //enter you Adafruit.io username inplace of ****
+  client.subscribe("****/throttle");  //enter you Adafruit.io username inplace of ****
 }
 
 void messageReceived(String &topic, String &payload) {
@@ -71,8 +71,8 @@ void loop() {
     Serial.println(" Amps RMS ");
     Serial.print(Wattage); 
     Serial.println(" Watt ");
-    client.publish("jigneshk5/feeds/power1", String(Wattage));
-    client.publish("jigneshk5/feeds/current1", String(AmpsRMS));
+    client.publish("****/feeds/power1", String(Wattage));   //enter you Adafruit.io username inplace of ****
+    client.publish("****/feeds/current1", String(AmpsRMS));  //enter you Adafruit.io username inplace of ****
   }
 }
 float getVPP()
